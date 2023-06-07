@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+package proto;
+option go_package = "test/service/myrpc/proto";
+
+import "google/api/annotations.proto";
+
+service Device {
+  // 设备注册
+  rpc deviceReg(deviceRegReq) returns (deviceResp) {
+    option (google.api.http) = {
+      post : "/v1/device/register"
+      body : "*"
+    };
+  };
+  // 设备列表
+  rpc deviceGet(deviceGetReq) returns (deviceGetResp) {
+    option (google.api.http) = {
+      get : "/v1/device"
+    };
+  };
+  // 设备修改
+  rpc devicePut(devicePutReq) returns (devicePutResp) {
+    option (google.api.http) = {
+      put : "/v1/device"
+      body : "*"
+    };
+  };
+}
+
+message deviceRegReq {
+  string sn = 3;
+  string name = 5;
+}
+
+message deviceResp {
+  string message = 1;
+  string data = 3; //登录凭证
+  int64 total = 4;
+}
+
+message deviceGetReq {
+  int32 limit = 1;
+  int32 offset = 2;
+  string fuzzy = 3;
+  int32 groupid = 4;
+  int32 typeid = 5;
+}
+
+message deviceGetResp {
+  string message = 1;
+  repeated deviceInfo data = 3;
+  int64 total = 4;
+}
+
+message deviceInfo {
+  int32 id = 1;
+  string name = 2;
+  string sn = 3;
+  int64 createtime = 4;
+  int32 groupid = 5;
+  string details = 6;
+  int32 typeid = 7;
+}
+
+message devicePutReq {
+  int32 id = 1;
+  string name = 2;
+  int32 groupid = 3;
+  string details = 4;
+  int32 typeid = 5;
+}
+
+message devicePutResp { string message = 1; }

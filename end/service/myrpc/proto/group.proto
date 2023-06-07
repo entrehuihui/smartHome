@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package proto;
+option go_package = "test/service/myrpc/proto";
+
+import "google/api/annotations.proto";
+
+service Group {
+  // 设备组列表
+  rpc groupGet(groupGetReq) returns (groupGetResp) {
+    option (google.api.http) = {
+      get : "/v1/group"
+    };
+  };
+  // 增加设备组
+  rpc groupPost(groupPostReq) returns (groupPostResp) {
+    option (google.api.http) = {
+      post : "/v1/group"
+      body : "*"
+    };
+  };
+  // 删除设备组
+  rpc groupDel(groupDelReq) returns (groupDelResp) {
+    option (google.api.http) = {
+      delete : "/v1/group/{id=*}"
+    };
+  };
+  // 修改设备组
+  rpc groupPut(groupPutReq) returns (groupPutResp) {
+    option (google.api.http) = {
+      put : "/v1/group"
+      body : "*"
+    };
+  };
+}
+
+message groupGetReq {
+  int32 limit = 1;
+  int32 offset = 2;
+  string fuzzy = 3;
+}
+
+message groupGetResp {
+  string message = 1;
+  repeated groupInfo data = 2;
+  int64 total = 3;
+}
+
+message groupInfo {
+  int32 id = 1;
+  string name = 2;
+  string details = 3;
+  int64 createtime = 4;
+}
+
+message groupPostReq {
+  string name = 1;
+  string details = 2;
+}
+
+message groupPostResp { string message = 1; }
+
+message groupDelReq { int32 id = 1; }
+
+message groupDelResp { string message = 1; }
+
+message groupPutReq {
+  string name = 1;
+  string details = 2;
+  int32 id = 3;
+}
+message groupPutResp { string message = 1; }

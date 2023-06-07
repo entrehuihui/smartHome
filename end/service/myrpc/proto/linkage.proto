@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package proto;
+option go_package = "test/service/myrpc/proto";
+
+import "google/api/annotations.proto";
+
+service Linkage {
+  // 联动组列表
+  rpc linkageGet(linkageGetReq) returns (linkageGetResp) {
+    option (google.api.http) = {
+      get : "/v1/linkage"
+    };
+  };
+  // 增加联动组
+  rpc linkagePost(linkagePostReq) returns (linkagePostResp) {
+    option (google.api.http) = {
+      post : "/v1/linkage"
+      body : "*"
+    };
+  };
+  // 删除联动组
+  rpc linkageDel(linkageDelReq) returns (linkageDelResp) {
+    option (google.api.http) = {
+      delete : "/v1/linkage/{id=*}"
+    };
+  };
+  // 修改联动组
+  rpc linkagePut(linkagePutReq) returns (linkagePutResp) {
+    option (google.api.http) = {
+      put : "/v1/linkage"
+      body : "*"
+    };
+  };
+}
+
+message linkageGetReq {
+  int32 limit = 1;
+  int32 offset = 2;
+  string fuzzy = 3;
+}
+
+message linkageGetResp {
+  string message = 1;
+  repeated linkageInfo data = 2;
+  int64 total = 3;
+}
+
+message linkageInfo {
+  int32 id = 1;
+  string name = 2;
+  string details = 3;
+  int64 createtime = 4;
+}
+
+message linkagePostReq {
+  string name = 1;
+  string details = 2;
+}
+
+message linkagePostResp { string message = 1; }
+
+message linkageDelReq { int32 id = 1; }
+
+message linkageDelResp { string message = 1; }
+
+message linkagePutReq {
+  string name = 1;
+  string details = 2;
+  int32 id = 3;
+}
+message linkagePutResp { string message = 1; }

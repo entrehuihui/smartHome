@@ -1,0 +1,38 @@
+[Server]
+port = 5800
+serverName = "XXX.laoyinbi.cn"
+
+# Certs.serverDir
+[Certs]
+serverDir = "certs/"
+
+[Mysql]
+# host = "mysql:3306"
+user = "root"
+password = "xxxxx"
+dbname="smartHome"
+info = true
+
+[Redis]
+# redis url like : url="localhost:6379"
+# url="redis:6379"
+password = "xxxxx"
+# Whether to clear the redis cache: true is yes, false is no
+clearUp = true
+# Maximum number of idle connections in the pool.
+# maxIdle = 30
+# 数据库编号
+index = 1
+
+[Emails]
+# 发送邮件的名称 可以为空（此时则为邮箱名称）
+sender = "全屋智能"
+# 发送邮箱地址
+fromemails = "xxxxx@qq.com"
+# 邮箱密码
+password = "xxxxxxxxxxxxxx"
+# 邮箱服务器地址
+serverhost = "xxx.xx.com"
+# 邮箱服务器端口
+Serverport =587
+

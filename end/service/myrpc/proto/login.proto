@@ -1,0 +1,93 @@
+syntax = "proto3";
+
+package proto;
+option go_package = "test/service/myrpc/proto";
+
+import "google/api/annotations.proto";
+
+service Login {
+  // 登录
+  rpc loginWeb(loginWebReq) returns (loginresp) {
+    option (google.api.http) = {
+      post : "/v1/login/login"
+      body : "*"
+    };
+  };
+  // 修改密码(登陆前)
+  rpc loginPwd(loginPwdReq) returns (loginresp) {
+    option (google.api.http) = {
+      put : "/v1/login/password"
+      body : "*"
+    };
+  };
+  // 修改密码(登陆后)
+  rpc loginPwdLogin(loginPwdLoginReq) returns (loginresp) {
+    option (google.api.http) = {
+      put : "/v1/login/password/login"
+      body : "*"
+    };
+  };
+  // 修改邮箱/昵称
+  rpc loginInfo(loginInfoReq) returns (loginresp) {
+    option (google.api.http) = {
+      put : "/v1/login/info"
+      body : "*"
+    };
+  };
+  // 创建账号
+  rpc loginUser(loginUserReq) returns (loginresp) {
+    option (google.api.http) = {
+      post : "/v1/login/user"
+      body : "*"
+    };
+  };
+  // 发送创建账户验证码
+  rpc loginUserCode(loginUserCodeReq) returns (loginresp) {
+    option (google.api.http) = {
+      post : "/v1/login/user/code"
+      body : "*"
+    };
+  };
+}
+
+message loginWebReq {
+  string emails = 1;
+  string password = 2;
+  string time = 3;
+}
+
+message loginresp {
+  string message = 1;
+  loginInfo data = 3;
+}
+
+message loginInfo {
+  string nicename = 1;
+  string emails = 2;
+  string token = 3;
+}
+
+message loginPwdReq {
+  string emails = 1;
+  string password = 3;
+}
+
+message loginPwdLoginReq {
+  string password = 1;
+  string newPassword = 2;
+  string time = 3;
+}
+
+message loginInfoReq { string nickName = 1; }
+
+message loginUserReq {
+  string emails = 1;
+  string password = 2;
+  string nickName = 3;
+}
+
+message loginUserCodeReq {
+  string emails = 1;
+  string types = 2;
+  string name = 3;
+}

@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package proto;
+option go_package = "test/service/myrpc/proto";
+
+import "google/api/annotations.proto";
+
+service Types {
+  // 设备类型列表
+  rpc typesGet(typesGetReq) returns (typesGetResp) {
+    option (google.api.http) = {
+      get : "/v1/types"
+    };
+  };
+  // 增加设备类型
+  rpc typesPost(typesPostReq) returns (typesPostResp) {
+    option (google.api.http) = {
+      post : "/v1/types"
+      body : "*"
+    };
+  };
+  // 删除设备类型
+  rpc typesDel(typesDelReq) returns (typesDelResp) {
+    option (google.api.http) = {
+      delete : "/v1/types/{id=*}"
+    };
+  };
+  // 修改设备类型
+  rpc typesPut(typesPutReq) returns (typesPutResp) {
+    option (google.api.http) = {
+      put : "/v1/types"
+      body : "*"
+    };
+  };
+}
+
+message typesGetReq {
+  int32 limit = 1;
+  int32 offset = 2;
+  string fuzzy = 3;
+}
+
+message typesGetResp {
+  string message = 1;
+  repeated typesInfo data = 2;
+  int64 total = 3;
+}
+
+message typesInfo {
+  int32 id = 1;
+  string name = 2;
+  string details = 3;
+  int64 createtime = 4;
+}
+
+message typesPostReq {
+  string name = 1;
+  string details = 2;
+}
+
+message typesPostResp { string message = 1; }
+
+message typesDelReq { int32 id = 1; }
+
+message typesDelResp { string message = 1; }
+
+message typesPutReq {
+  string name = 1;
+  string details = 2;
+  int32 id = 3;
+}
+message typesPutResp { string message = 1; }

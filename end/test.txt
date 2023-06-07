@@ -1,0 +1,23 @@
+Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODUwMjM5NjQsImciOiJ7XCJJRFwiOjEsXCJOaWNlbmFtZVwiOlwi5q-b5q-bXCIsXCJVcGRhdGV0aW1lXCI6MCxcIlBob3RvbnVtXCI6XCIxODA3Njc0OTkwNlwifSJ9.S_eC2aYqBpjd3njoNyuVspaoiPPnzGG4D_H82Um1IGw
+// 创建
+{
+  "code": "CHOAYY",
+  "emails": "273227543@qq.com",
+  "nickName": "密码",
+  "password": "2e33a9b0b06aa0a01ede70995674ee23"
+}
+// 登录
+{
+  "emails": "273227543@qq.com",
+  "password": "aa13639bd9a58d63fe59b1c81eb3ff49",
+  "time": "1685065246000"
+}
+
+// 设备登录
+{
+  "name": "模拟设备",
+  "sn": "sm202305241716",
+ "emails": "273227543@qq.com",
+  "password": "aa13639bd9a58d63fe59b1c81eb3ff49",
+  "time": "1685065246000"
+}
