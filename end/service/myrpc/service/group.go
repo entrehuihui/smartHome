@@ -61,3 +61,19 @@ func (s Service) GroupPut(ctx context.Context, in *proto.GroupPutReq) (*proto.Gr
 	}
 	return operate.GroupPut(ctx, in)
 }
+
+// 设备组添加设备
+func (s Service) GroupDevicePost(ctx context.Context, in *proto.GroupDevicePostReq) (*proto.GroupDevicePostResp, error) {
+	if len(in.Sn) == 0 {
+		return nil, tools.ERROR(500, "设备SN不能为空")
+	}
+	return operate.GroupDevicePost(ctx, in)
+}
+
+// 设备组删除设备
+func (s Service) GroupDevicePut(ctx context.Context, in *proto.GroupDevicePutReq) (*proto.GroupDevicePutResp, error) {
+	if len(in.Sn) == 0 {
+		return nil, tools.ERROR(500, "设备SN不能为空")
+	}
+	return operate.GroupDevicePut(ctx, in)
+}

@@ -2,7 +2,7 @@
   <div>
     <Menu mode="inline" v-model:selectedKeys="selectedKeys" @click="click" v-model:openKeys="openKeys"
       style="user-select: none">
-      <MenuItem v-for="v in routes" :key="v.name">
+      <MenuItem v-for="v in routes" :key="v.key">
       <span>
         <ZoomInOutlined />
         <span>
@@ -41,14 +41,14 @@ export default {
     };
     onMounted(async () => {
       const routes = router.options.routes;
-      var local = router.options.history.location;
+      var local = router.options.history.location.split("?")[0]
       for (const v of routes) {
         if (v.details) {
           data.routes.push(v);
-          if (local == v.path) {
-            local = v.details
-            data.selectedKeys = [v.name];
-          }
+        }
+        if (local == v.path) {
+          // local = v.details
+          data.selectedKeys = [v.key];
         }
       }
       emit("my-emit", [local]);

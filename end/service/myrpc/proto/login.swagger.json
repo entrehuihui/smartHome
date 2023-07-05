@@ -265,6 +265,9 @@
         "emails": {
           "type": "string"
         },
+        "code": {
+          "type": "string"
+        },
         "password": {
           "type": "string"
         }
@@ -291,6 +294,9 @@
           "type": "string"
         },
         "password": {
+          "type": "string"
+        },
+        "code": {
           "type": "string"
         },
         "nickName": {

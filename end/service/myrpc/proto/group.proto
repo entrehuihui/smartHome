@@ -32,6 +32,20 @@ service Group {
       body : "*"
     };
   };
+  // 设备组添加设备
+  rpc groupDevicePost(groupDevicePostReq) returns (groupDevicePostResp) {
+    option (google.api.http) = {
+      post : "/v1/group/device"
+      body : "*"
+    };
+  };
+  // 设备组删除设备
+  rpc groupDevicePut(groupDevicePutReq) returns (groupDevicePutResp) {
+    option (google.api.http) = {
+      put : "/v1/group/device"
+      body : "*"
+    };
+  };
 }
 
 message groupGetReq {
@@ -70,3 +84,17 @@ message groupPutReq {
   int32 id = 3;
 }
 message groupPutResp { string message = 1; }
+
+message groupDevicePostReq {
+  repeated string sn = 1;
+  int32 groupID = 2;
+}
+
+message groupDevicePostResp { string message = 1; }
+
+message groupDevicePutReq {
+  repeated string sn = 1;
+  int32 groupID = 2;
+}
+
+message groupDevicePutResp { string message = 1; }

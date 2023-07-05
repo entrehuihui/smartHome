@@ -5,13 +5,14 @@
                 <div style="float:left; padding:5px">
                     设备型号:
                     <Select v-model:value="typeid" show-search placeholder="设备型号" style="width: 250px;" :options="typeList"
-                        :filter-option="filterOption" :fieldNames="{ value: 'id', label: 'name' }"></Select>
+                        :filter-option="filterOption" :fieldNames="{ value: 'id', label: 'name' }">
+                    </Select>
                 </div>
                 <div style="float:left; padding:5px">
                     设备组:
                     <Select v-model:value="groupid" show-search placeholder="设备型号" style="width: 250px;"
-                        :options="groupList" :filter-option="filterOption"
-                        :fieldNames="{ value: 'id', label: 'name' }"></Select>
+                        :options="groupList" :filter-option="filterOption" :fieldNames="{ value: 'id', label: 'name' }">
+                    </Select>
                 </div>
                 <div style="float:left; padding:5px">
                     <Input style="width:250px" placeholder="模糊检索" v-model:value="fuzzy" allow-clear :allowClear="true"

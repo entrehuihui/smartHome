@@ -5,6 +5,8 @@ import deviceInfo from '@/components/device'
 import group from '@/components/group'
 import linkale from '@/components/linkage'
 import types from '@/components/types'
+import groupinfo from '@/components/group/info'
+import linkagenfo from '@/components/linkage/info'
 const routes = [
   {
     path: '/',
@@ -21,24 +23,41 @@ const routes = [
     name: 'device',
     component: deviceInfo,
     details: "设备列表",
+    key:"device"
   },
   {
     path: '/group',
     name: 'group',
     component: group,
     details: "设备组",
+    key:"group"
+  },
+  {
+    path: '/groupinfo',
+    name: 'groupinfo',
+    component: groupinfo,
+    father:"设备组",
+    key:"group"
+  },
+  {
+    path: '/linkagenfo',
+    name: 'linkagenfo',
+    component: linkagenfo,
+    key:"linkale"
   },
   {
     path: '/linkale',
     name: 'linkale',
     component: linkale,
     details: "设备联动",
+    key:"linkale"
   },
   {
     path: '/types',
     name: 'types',
     component: types,
     details: "设备型号",
+    key:"types"
   },
   {
     path: '/about',

@@ -118,6 +118,70 @@
         ]
       }
     },
+    "/v1/group/device": {
+      "post": {
+        "summary": "设备组添加设备",
+        "operationId": "Group_groupDevicePost",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protogroupDevicePostResp"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protogroupDevicePostReq"
+            }
+          }
+        ],
+        "tags": [
+          "Group"
+        ]
+      },
+      "put": {
+        "summary": "设备组删除设备",
+        "operationId": "Group_groupDevicePut",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protogroupDevicePutResp"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protogroupDevicePutReq"
+            }
+          }
+        ],
+        "tags": [
+          "Group"
+        ]
+      }
+    },
     "/v1/group/{id}": {
       "delete": {
         "summary": "删除设备组",
@@ -165,6 +229,52 @@
       }
     },
     "protogroupDelResp": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "protogroupDevicePostReq": {
+      "type": "object",
+      "properties": {
+        "sn": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "groupID": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "protogroupDevicePostResp": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "protogroupDevicePutReq": {
+      "type": "object",
+      "properties": {
+        "sn": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "groupID": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "protogroupDevicePutResp": {
       "type": "object",
       "properties": {
         "message": {

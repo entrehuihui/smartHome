@@ -397,7 +397,7 @@ func RegisterLoginHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 // RegisterLoginHandlerFromEndpoint is same as RegisterLoginHandler but
 // automatically dials to "endpoint" and closes the connection when "ctx" gets done.
 func RegisterLoginHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
-	conn, err := grpc.Dial(endpoint, opts...)
+	conn, err := grpc.DialContext(ctx, endpoint, opts...)
 	if err != nil {
 		return err
 	}

@@ -13,4 +13,20 @@ export default {
     }
     return response;
   },
+  put: async (proxy, paprm) => {
+    const response = await proxy.$req.put("/v1/device", paprm);
+    notification
+    if (response.code) {
+      notification["error"]({
+        message: "修改失败",
+        description: response.message,
+      });
+      return null;
+    }
+    notification["success"]({
+      message: "修改成功",
+      description: response.message,
+    });
+    return true;
+  },
 };

@@ -235,6 +235,10 @@
         },
         "name": {
           "type": "string"
+        },
+        "typeid": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },

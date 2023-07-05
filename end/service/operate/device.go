@@ -35,13 +35,22 @@ func DeviceReg(ctx context.Context, in *proto.DeviceRegReq) (*proto.DeviceResp, 
 			Del:        0,
 			Groupid:    -1,
 			Details:    "",
-			Typeid:     -1,
+			Typeid:     int(in.Typeid),
 			Devicekey:  deviceKey,
 			Devicemd5:  deviceMD5,
 		}
+		count := int64(0)
 		databases.GetDB().Transaction(func(tx *gorm.DB) error {
+			// 查询设备型号
+			err := tx.Model(databases.Typesinfo{}).Where("id = ? AND userid = ? AND del = 0", in.Typeid, jwtInfo.ID).Count(&count).Error
+			if err != nil {
+				return err
+			}
+			if count != 0 {
+				return tools.ERROR(500, "设备型号错误")
+			}
 			// 先查询设备是否存在
-			err := tx.Where("sn = ? AND del = 0", in.Sn).Find(deviceInfo).Error
+			err = tx.Where("sn = ? AND del = 0", in.Sn).Find(deviceInfo).Error
 			if err != nil {
 				deviceKey = deviceInfo.Devicekey
 				return err
@@ -93,7 +102,19 @@ func DeviceGet(ctx context.Context, in *proto.DeviceGetReq) (*proto.DeviceGetRes
 }
 
 // 设备修改
-func DevicePut(ctx context.Context, in *proto.DevicePutReq) (*proto.DevicePutResp, error){
-	return nil,nil
+func DevicePut(ctx context.Context, in *proto.DevicePutReq) (*proto.DevicePutResp, error) {
+	userInfo := tools.GetJwtInfo(ctx)
+	err := databases.GetDB().Model(databases.Device{}).Where("id = ? AND userid = ?", in.Id, userInfo.ID).Updates(
+		map[string]interface{}{
+			"name":    in.Name,
+			"details": in.Details,
+			"typeid":  in.Typeid,
+			"groupid": in.Groupid,
+		}).Error
+	if err != nil {
+		return nil, err
+	}
+	return &proto.DevicePutResp{
+		Message: "修改成功",
+	}, nil
 }
-

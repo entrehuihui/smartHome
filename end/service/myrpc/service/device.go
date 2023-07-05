@@ -15,6 +15,9 @@ func (s Service) DeviceReg(ctx context.Context, in *proto.DeviceRegReq) (*proto.
 	if in.Name == "" {
 		return nil, tools.ERROR(500, "设备名称不能为空")
 	}
+	if in.Typeid < 1 {
+		return nil, tools.ERROR(500, "设备型号不能为空")
+	}
 	return operate.DeviceReg(ctx, in)
 }
 
@@ -30,7 +33,21 @@ func (s Service) DeviceGet(ctx context.Context, in *proto.DeviceGetReq) (*proto.
 }
 
 // 设备修改
-func (s Service) DevicePut(ctx context.Context, in *proto.DevicePutReq) (*proto.DevicePutResp, error){
+func (s Service) DevicePut(ctx context.Context, in *proto.DevicePutReq) (*proto.DevicePutResp, error) {
+	if in.Id < 1 {
+		return nil, tools.ERROR(500, "参数错误 ID错误")
+	}
+	if in.Name == "" {
+		return nil, tools.ERROR(500, "设备名称不能为空")
+	}
+	if in.Typeid < 1 {
+		return nil, tools.ERROR(500, "设备型号不能为空")
+	}
+	if in.Groupid < -1 || in.Groupid == 0 {
+		return nil, tools.ERROR(500, "参数错误 分组错误")
+	}
+	if in.Typeid < 1 {
+		return nil, tools.ERROR(500, "参数错误 设备型号错误")
+	}
 	return operate.DevicePut(ctx, in)
 }
-

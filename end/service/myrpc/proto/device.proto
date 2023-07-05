@@ -29,8 +29,9 @@ service Device {
 }
 
 message deviceRegReq {
-  string sn = 3;
-  string name = 5;
+  string sn = 2;
+  string name = 3;
+  int32 typeid = 1;
 }
 
 message deviceResp {

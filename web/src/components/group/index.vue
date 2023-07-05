@@ -26,10 +26,13 @@
                         </template>
                         <template v-else-if="column.dataIndex === 'action'">
                             <Space>
+                                <Button type="primary" @click="gotoInfo(record)">
+                                    详情
+                                </Button>
                                 <Button type="dashed" @click="updateInfo = record; updateShow = true">
                                     修改
                                 </Button>
-                                <Popconfirm title="是否确定删除该设备组?" ok-text="确定" cancel-text="取消" @confirm=" confirm(record) ">
+                                <Popconfirm title="是否确定删除该设备组?" ok-text="确定" cancel-text="取消" @confirm=" confirm(record)">
                                     <Button type="dashed" danger>
                                         删除
                                     </Button>
@@ -38,15 +41,15 @@
                         </template>
                     </template>
                 </Table>
-                <Pagination :total=" total " :showTotal=" (total) => `一共 ${total}条` " :pageSize=" limit "
-                    @change=" paginationChange " @showSizeChange=" showSizeChange " v-model:current=" offset "
-                    style="float: right" :showLessItems=" true " :showSizeChanger=" true ">
+                <Pagination :total="total" :showTotal="(total) => `一共 ${total}条`" :pageSize="limit"
+                    @change="paginationChange" @showSizeChange="showSizeChange" v-model:current="offset"
+                    style="float: right" :showLessItems="true" :showSizeChanger="true">
 
                 </Pagination>
             </div>
         </Space>
-        <Add v-if=" addShow " @close=" closeChild " />
-        <Update v-if=" updateShow " @close=" closeChild " :updateInfo=" updateInfo " />
+        <Add v-if="addShow" @close="closeChild" />
+        <Update v-if="updateShow" @close="closeChild" :updateInfo="updateInfo" />
     </layoutVue>
 </template>
 
@@ -61,6 +64,7 @@ import Add from './add.vue';
 import Que from "./que.js";
 import dayjs from "dayjs";
 import Update from './update.vue';
+import router from "@/router";
 
 
 export default {
@@ -139,8 +143,14 @@ export default {
         onMounted(() => {
             getData()
         })
+        const gotoInfo = (record) => {
+            router.push({
+                name: "groupinfo",
+                query: record
+            });
+        }
         return {
-            ...toRefs(state), columns, closeChild, getData, paginationChange, showSizeChange, confirm
+            ...toRefs(state), columns, closeChild, getData, paginationChange, showSizeChange, confirm, gotoInfo
         }
     }
 }

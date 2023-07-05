@@ -48,7 +48,6 @@ func LoginWeb(ctx context.Context, in *proto.LoginWebReq) (*proto.Loginresp, err
 	// 保存到redis
 	cache.SetRedisUserInfo(userInfo)
 	return &proto.Loginresp{
-		Code:    0,
 		Message: "",
 		Data: &proto.LoginInfo{
 			Nicename: userInfo.Nicename,

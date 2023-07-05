@@ -62,7 +62,7 @@ loop:
 	sqlDB.SetConnMaxLifetime(time.Hour)
 
 	// 迁移数据表
-	// return
+	return
 	err = db.AutoMigrate(Userinfo{}, Device{}, Groupinfo{}, Typesinfo{}, Linkageinfo{})
 	if err != nil {
 		log.Fatal(err)

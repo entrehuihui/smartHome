@@ -69,6 +69,7 @@ message loginInfo {
 
 message loginPwdReq {
   string emails = 1;
+  string code = 2;
   string password = 3;
 }
 
@@ -83,7 +84,8 @@ message loginInfoReq { string nickName = 1; }
 message loginUserReq {
   string emails = 1;
   string password = 2;
-  string nickName = 3;
+  string code = 3;
+  string nickName = 4;
 }
 
 message loginUserCodeReq {

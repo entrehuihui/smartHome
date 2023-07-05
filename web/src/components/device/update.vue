@@ -1,11 +1,21 @@
 <template>
     <Modal :visible="true" title="修改设备型号" :footer="null" @cancel="close">
-        <Form :model="formState" name="smartlogin" :labelCol="{ span: 0 }" :wrapperCol="{ span: 24 }" autocomplete="off"
+        <Form :model="formState" name="smartlogin" :labelCol="{ span: 4 }" :wrapperCol="{ span: 20 }" autocomplete="off"
             @finish="onFinish" @finishFailed="onFinishFailed" :rules="rules">
-            <FormItem name="deviceName">
+            <FormItem name="deviceName" label="设备名称">
                 <Input v-model:value="formState.deviceName" size="large" placeholder="输入设备型号名称" :maxlength="30" />
             </FormItem>
-            <FormItem name="deviceDetails">
+            <FormItem name="typeid" label="设备型号">
+                <Select v-model:value="formState.typeid" show-search placeholder="设备型号" :options="typeData"
+                    :filter-option="filterOption" :fieldNames="{ value: 'id', label: 'name' }">
+                </Select>
+            </FormItem>
+            <FormItem name="groupid" label="设备分组">
+                <Select v-model:value="formState.groupid" show-search placeholder="设备型号" :options="groupData"
+                    :filter-option="filterOption" :fieldNames="{ value: 'id', label: 'name' }">
+                </Select>
+            </FormItem>
+            <FormItem name="deviceDetails" label="设备备注">
                 <Textarea v-model:value="formState.deviceDetails" size="large" placeholder="输入设备型号备注" :maxlength="300" />
             </FormItem>
             <FormItem :wrapperCol="{ offset: 0, span: 24 }">
@@ -17,14 +27,16 @@
 
 <script>
 import { reactive, toRefs, getCurrentInstance, onMounted } from 'vue'
-import { Modal, Button, Form, Input, Textarea } from "ant-design-vue";
+import { Modal, Button, Form, Input, Textarea, Select } from "ant-design-vue";
 import Que from "./que.js";
 export default {
     name: "deviceUpdate",
-    components: { Modal, Button, Form, FormItem: Form.Item, Input, Textarea },
+    components: { Modal, Button, Form, FormItem: Form.Item, Input, Textarea, Select },
     setup(props, { emit }) {
         const { proxy } = getCurrentInstance();
         const state = reactive({
+            typeData: [],
+            groupData: [],
         })
         const formState = reactive({
             deviceName: '',
@@ -43,6 +55,16 @@ export default {
                     break;
                 case "deviceDetails":
                     break;
+                case "groupid":
+                    if (value < -1 || value == 0) {
+                        return Promise.reject("设备组不能为空")
+                    }
+                    break;
+                case "typeid":
+                    if (value < 1) {
+                        return Promise.reject("设备型号不能为空")
+                    }
+                    break;
                 default:
                     break;
             }
@@ -55,6 +77,14 @@ export default {
                 trigger: 'change',
             }],
             deviceDetails: [{
+                validator: validatePass,
+                trigger: 'change',
+            }],
+            groupid: [{
+                validator: validatePass,
+                trigger: 'change',
+            }],
+            typeid: [{
                 validator: validatePass,
                 trigger: 'change',
             }],
@@ -82,9 +112,14 @@ export default {
             formState.deviceDetails = props.updateInfo.details
             formState.groupid = props.updateInfo.groupid
             formState.typeid = props.updateInfo.typeid
+            state.typeData = props.typeList.slice(1)
+            state.groupData = props.groupList.slice(1)
         })
+        const filterOption = (input, option) => {
+            return option.name.toLowerCase().indexOf(input.toLowerCase()) >= 0;
+        }
         return {
-            ...toRefs(state), formState, onFinish, onFinishFailed, validatePass, rules, close
+            ...toRefs(state), formState, onFinish, onFinishFailed, validatePass, rules, close, filterOption
         }
     },
     props: {

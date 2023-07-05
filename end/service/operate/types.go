@@ -5,6 +5,8 @@ import (
 	"test/service/databases"
 	"test/service/myrpc/proto"
 	"test/service/tools"
+
+	"gorm.io/gorm"
 )
 
 // 设备类型列表
@@ -47,7 +49,22 @@ func TypesPost(ctx context.Context, in *proto.TypesPostReq) (*proto.TypesPostRes
 // 删除设备类型
 func TypesDel(ctx context.Context, in *proto.TypesDelReq) (*proto.TypesDelResp, error) {
 	userInfo := tools.GetJwtInfo(ctx)
-	err := databases.GetDB().Model(databases.Typesinfo{}).Where("id = ? AND userid = ? AND del = 0", in.Id, userInfo.ID).Update("del", 1).Error
+	// 先检测有没有设备 然后再删除
+	count := int64(0)
+	err := databases.GetDB().Transaction(func(tx *gorm.DB) error {
+		err := tx.Model(databases.Device{}).Where("typeid = ? AND del = 0", in.Id).Count(&count).Error
+		if err != nil {
+			return err
+		}
+		if count != 0 {
+			return tools.ERROR(500, "设备型号无法删除")
+		}
+		err = tx.Model(databases.Typesinfo{}).Where("id = ? AND userid = ? AND del = 0", in.Id, userInfo.ID).Update("del", 1).Error
+		if err != nil {
+			return err
+		}
+		return err
+	})
 	if err != nil {
 		return nil, err
 	}
