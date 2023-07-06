@@ -108,21 +108,21 @@ func GroupDevicePost(ctx context.Context, in *proto.GroupDevicePostReq) (*proto.
 		return nil, err
 	}
 	if len(in.Sn) != int(count) {
-		return nil, tools.ERROR(500, "SN错误")
+		return nil, tools.ERROR(500, "SN错误或设备不存在")
 	}
 	// 修改设备组
-	err = databases.GetDB().Model(databases.Device{}).Where("sn = ? AND userid = ?", in.Sn, userInfo.ID).Update("groupdid", in.GroupID).Error
+	err = databases.GetDB().Model(databases.Device{}).Where("sn = ? AND userid = ?", in.Sn, userInfo.ID).Update("groupid", in.GroupID).Error
 	if err != nil {
 		return nil, err
 	}
 	return &proto.GroupDevicePostResp{
-		Message: "修改成功",
+		Message: "成功",
 	}, nil
 }
 
 // 设备组删除设备
 func GroupDevicePut(ctx context.Context, in *proto.GroupDevicePutReq) (*proto.GroupDevicePutResp, error) {
-	err := databases.GetDB().Model(databases.Device{}).Where("sn = ? AND groupid = ?", in.Sn, in.GroupID).Update("groupdid", -1).Error
+	err := databases.GetDB().Model(databases.Device{}).Where("sn = ? AND groupid = ?", in.Sn, in.GroupID).Update("groupid", -1).Error
 	if err != nil {
 		return nil, err
 	}

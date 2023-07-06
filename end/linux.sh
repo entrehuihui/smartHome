@@ -5,5 +5,7 @@ protoc -I ./service/myrpc/proto --grpc-gateway_out ./service/myrpc/proto --grpc-
 
 protoc -I ./service/myrpc/proto --proto_path=../ --swagger_out=logtostderr=true:./service/myrpc/proto/ ./service/myrpc/proto/*.proto
 
+# go install github.com/entrehuihui/aias
 aias -d service/myrpc/proto
-completes
+# go install github.com/entrehuihui/grpa-gateway-complete
+grpa-gateway-complete
