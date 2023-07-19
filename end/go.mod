@@ -22,6 +22,8 @@ require (
 )
 
 require (
+	github.com/entrehuihui/aias v0.0.0-20230705072015-6630ddac6b20 // indirect
+	github.com/entrehuihui/grpa-gateway-complete v0.0.0-20230714034031-42e48f677f83 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
 	github.com/ghodss/yaml v1.0.0 // indirect
 	github.com/go-logr/logr v1.2.4 // indirect

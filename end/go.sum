@@ -58,6 +58,10 @@ github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/dgrijalva/jwt-go v3.2.0+incompatible h1:7qlOGliEKZXTDg6OTjfoBKDXWrumCAMpl/TFQ4/5kLM=
 github.com/dgrijalva/jwt-go v3.2.0+incompatible/go.mod h1:E3ru+11k8xSBh+hMPgOLZmtrrCbhqsmaPHjLKYnJCaQ=
+github.com/entrehuihui/aias v0.0.0-20230705072015-6630ddac6b20 h1:kPMcvTocqVEbAgIz1Zbn/9DbjlerT7Q7Fsz7mD4Nih0=
+github.com/entrehuihui/aias v0.0.0-20230705072015-6630ddac6b20/go.mod h1:fG7BZbOzbT3SJ5cHNalBMsImddfUg9DWOwrRR2splPk=
+github.com/entrehuihui/grpa-gateway-complete v0.0.0-20230714034031-42e48f677f83 h1:FQtvFuxavYehXdX0JGpHOcADoYqTfOOpou6hj/e8+Zc=
+github.com/entrehuihui/grpa-gateway-complete v0.0.0-20230714034031-42e48f677f83/go.mod h1:zzcvKjCnEMn0zl6h7M99AqiFLt0RSHAh6Jik9Uz2m5U=
 github.com/envoyproxy/go-control-plane v0.9.0/go.mod h1:YTl/9mNaCwkRvm6d1a2C3ymFceY/DCBVvsKhRF0iEA4=
 github.com/envoyproxy/go-control-plane v0.9.1-0.20191026205805-5f8ba28d4473/go.mod h1:YTl/9mNaCwkRvm6d1a2C3ymFceY/DCBVvsKhRF0iEA4=
 github.com/envoyproxy/go-control-plane v0.9.4/go.mod h1:6rpuAdCZL397s3pYoYcLgu1mIlRU8Am5FuJP05cCM98=
